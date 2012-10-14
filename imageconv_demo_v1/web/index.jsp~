@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>UploadiFive Test</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        <script src="/gajaba_app/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="/gajaba_app/uploadify/uploadify.css">
+        <style type="text/css">
+            body {
+                font: 13px Arial, Helvetica, Sans-serif;
+            }
+        </style>
+        <script type="text/javascript">
+            $(function() {
+                $('#file_upload').uploadify({
+                    'swf'      : '/gajaba_app//uploadify/uploadify.swf',
+                    'uploader' : '/gajaba_app/Upload'
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <h1>Uploadify Demo</h1>
+          <div class="bootcamp">
+    <h1>GitHub Bootcamp <span>If you are still new to things, we’ve provided a few walkthroughs to get you started.</span>
+    <a original-title="Hide this notice forever" href="https://github.com/dashboard/dismiss_bootcamp" class="js-dismiss-bootcamp dismiss-bootcamp dismiss tooltipped leftwards"><span class="mini-icon mini-icon-remove-close"></span></a>
+    </h1>
+    <div class="bootcamp-body">
+    <ul>
+      <li class="setup">
+        <a href="http://help.github.com/set-up-git-redirect" target="_blank">
+          <div class="image"></div>
+          <div class="desc">
+            <h2>Set Up Git</h2>
+            <p>A quick guide to help you get started with Git.</p>
+          </div>
+          <span class="step-number one"></span>
+        </a>
+      </li>
+      <li class="create-a-repo">
+        <a href="http://help.github.com/create-a-repo" target="_blank">
+          <div class="image"></div>
+          <div class="desc">
+            <h2>Create A Repository</h2>
+            <p>Create the place where your commits will be stored.</p>
+          </div>
+          <span class="step-number two"></span>
+        </a>
+      </li>
+      <li class="fork-a-repo">
+        <a href="http://help.github.com/fork-a-repo" target="_blank">
+          <div class="image"></div>
+          <div class="desc">
+            <h2>Fork a Repository</h2>
+            <p>Copy a repo to create a new, unique project from its contents.</p>
+          </div>
+          <span class="step-number three"></span>
+        </a>
+      </li>
+      <li class="be-social">
+        <a href="http://help.github.com/be-social" target="_blank">
+          <div class="image"></div>
+          <div class="desc">
+            <h2>Be social</h2>
+            <p>Follow a friend.<br>Watch a project.</p>
+          </div>
+          <span class="step-number four"></span>
+        </a>
+      </li>
+    </ul>
+    </div> <!-- /bootcamp-body -->
+  </div> <!-- /bootcamp -->
+        <form>
+            <div id="queue"></div>
+            <input id="file_upload" name="file_upload" type="file" multiple="true">
+        </form>
+    </body>
+</html>
