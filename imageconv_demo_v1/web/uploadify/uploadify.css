@@ -4,6 +4,10 @@ Copyright (c) 2012 Reactive Apps, Ronnie Garcia
 Released under the MIT License <http://www.opensource.org/licenses/mit-license.php> 
 */
 
+body {
+    margin-left: auto;
+    margin-right: auto;
+}
 .uploadify {
 	position: relative;
 	margin-bottom: 1em;
@@ -92,8 +96,8 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 }
 /* For Header Image CSS */
 .bootcamp {
-    margin: 0 0 20px;
-    width: 920px;;
+    margin: auto;
+    width: 1201px;;
 }
 .bootcamp h1 {
     -moz-border-bottom-colors: none;
@@ -148,8 +152,13 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
     border-style: solid;
     border-width: 1px 1px 2px;
     overflow: hidden;
-    padding: 0 0 0 0;
+    padding: 0 0 10px 10px;
 }
+
+.bootcamp .bootcamp-body ul { 
+    padding-left: 1px;
+}
+
 .bootcampo ul {
     list-style-type: none;
     position: relative;
@@ -164,10 +173,10 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
     float: left;
     font-size: 13px;
     font-weight: normal;
-    height: 215px;
+    height: 245px;
     margin: 0 10px 0 0;
     position: relative;
-    width: 215px;
+    width: 285px;
 }
 .bootcamp ul li:hover {
     background: -moz-linear-gradient(#FCFCE9, #F1EEA3) repeat scroll 0 0 transparent;
@@ -182,7 +191,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
     background-repeat: no-repeat;
     border-bottom: 1px solid #F1EFAF;
     display: block;
-    height: 160px;
+    height: 190px;
     position: relative;
 }
 .bootcamp .setup .image {
@@ -259,3 +268,17 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 .bootcamp ul li:hover .four {
     background-position: -192px -80px;
 }
+
+h1 {
+   text-align: center; 
+}
+
+body {
+    text-align: center;
+}
+
+#file_upload {
+    margin-top: 10px;        
+}
+
+
