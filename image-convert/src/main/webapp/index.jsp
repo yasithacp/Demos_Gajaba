@@ -15,17 +15,15 @@
         $(function () {
             $('#file_upload').uploadify({
                 'swf':'swf/uploadify.swf',
-                'uploader':'upload'
+                'uploader':'upload?action=bw'
             });
         });
     </script>
 </head>
 
 <body>
-<h1>Uploadify Demo</h1>
-
 <div class="bootcamp">
-    <h1>Gajaba <span>Server Status</span>
+    <h1>Gajaba Image Convection Demo<span>Server Status</span>
     </h1>
 
     <div class="bootcamp-body">
@@ -79,9 +77,11 @@
     <!-- /bootcamp-body -->
 </div>
 <!-- /bootcamp -->
-<form>
+<form style="width:1201px;margin: auto ">
     <div id="queue"></div>
-    <input id="file_upload" name="file_upload" type="file" multiple="true">
+    <div style="float: left;">
+        <input id="file_upload" name="file_upload" type="file" multiple="true">
+    </div>
 </form>
 
 <script>

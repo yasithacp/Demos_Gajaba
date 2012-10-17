@@ -53,9 +53,11 @@ body {
 
 .uploadify-queue {
     margin-bottom: 1em;
+    float: left;
 }
 
 .uploadify-queue-item {
+    float: left;
     background-color: #F5F5F5;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -181,7 +183,7 @@ body {
     float: left;
     font-size: 13px;
     font-weight: normal;
-    height: 245px;
+    height: 480px;
     margin: 0 10px 0 0;
     position: relative;
     width: 285px;
@@ -202,11 +204,13 @@ body {
     background-repeat: no-repeat;
     border-bottom: 1px solid #F1EFAF;
     display: block;
-    height: 190px;
+    height: 398px;
     position: relative;
 }
 
 .bootcamp .setup .image {
+    overflow: auto;
+    z-index: 1;
     /*background-image: url("https://a248.e.akamai.net/assets.github.com/images/modules/dashboard/bootcamp/octocat_setup.png?01fc92e0");*/
 }
 
@@ -308,12 +312,24 @@ body {
 
 #file_upload {
     margin-top: 10px;
+    float: left;
 }
 
 .doneImg {
     border: 1px solid;
     border-radius: 5px 5px 5px 5px;
-    height: 100px;
+    height: 120px;
     margin: 6px;
+    background: -moz-linear-gradient(#EEEEEE, #FAFAFA) repeat scroll 0 0 transparent;
+}
+
+.statusImg {
+    border: 1px solid #AAAAAA;
+    border-radius: 3px 3px 3px 3px;
+    float: left;
+    margin-left: 65px;
+    padding: 3px;
+    height: 55px;
+    width: 40px;
 }
 

@@ -8,10 +8,7 @@ import java.io.File;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.List;
+import java.util.*;
 
 public class ContextListener implements ServletContextListener {
 
@@ -23,7 +20,7 @@ public class ContextListener implements ServletContextListener {
     private static Agent agent;
     private static String serverId;
     private static File tempDir;
-    private static List<String> done = new ArrayList<String>();
+    private static Stack<String> done = new Stack<String>();
     private static List<String> processing = new ArrayList<String>();
 
     @Override
@@ -122,7 +119,7 @@ public class ContextListener implements ServletContextListener {
     }
 
     public static void addDone(File file) {
-        done.add(file.getName());
+        done.add(0, file.getName());
     }
 
     public static void removeProcessing(File file) {
