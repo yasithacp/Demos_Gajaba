@@ -17,7 +17,10 @@ public class BlurConverter implements ImageConverter {
 
         Kernel kernel = new Kernel(9, 9,floats);
         BufferedImageOp op = new ConvolveOp(kernel, ConvolveOp.EDGE_NO_OP, null);
-        BufferedImage result = op.filter(img, null);
+        BufferedImage result = img;
+        for (int i = 0; i < 100; i++) {
+             result = op.filter(result, null);
+        }
         return result;
     }
 
