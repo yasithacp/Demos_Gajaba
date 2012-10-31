@@ -5,7 +5,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
 import org.gajaba.demo.converter.BlackAndWhiteConverter;
 import org.gajaba.demo.converter.BlurConverter;
 import org.gajaba.demo.converter.ImageConverter;
@@ -18,8 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class UploadServlet extends HttpServlet {
 
