@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<axis2 xmlns="http://www.netbeans.org/ns/axis2/1">
+    <service name="SampleService">
+        <service-class>org.com.SampleService</service-class>
+        <generate-wsdl targetNamespace="http://com/org/" schemaNamespace="http://com/org/xsd"/>
+    </service>
+    <libraries>
+        <library-ref name="jxta.jar"/>
+        <library-ref name="shoal-gms.jar"/>
+        <library-ref name="agent-1.0.jar"/>
+        <library-ref name="group-1.0.jar"/>
+    </libraries>
+</axis2>

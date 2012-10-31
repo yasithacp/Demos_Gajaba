@@ -13,11 +13,20 @@
     </style>
     <script type="text/javascript">
         $(function () {
+            uploadify();
+            $('#actionDrp').change(function(){
+                uploadify();
+            });
+
+        });
+
+        function uploadify(){
+            var drpValue = $('#actionDrp').val();
             $('#file_upload').uploadify({
                 'swf':'swf/uploadify.swf',
-                'uploader':'upload?action=bw'
+                'uploader':'upload?action='+drpValue
             });
-        });
+        }
     </script>
 </head>
 
@@ -81,6 +90,10 @@
     <div id="queue"></div>
     <div style="float: left;">
         <input id="file_upload" name="file_upload" type="file" multiple="true">
+        <select id="actionDrp" class="selectBox">
+            <option value="bw">To Black and White</option>
+            <option value="bl">To Blurred Image</option>
+        </select>
     </div>
 </form>
 
