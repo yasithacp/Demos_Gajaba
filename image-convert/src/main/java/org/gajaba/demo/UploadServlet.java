@@ -5,12 +5,10 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-<<<<<<< HEAD
+
 import org.gajaba.demo.converter.BlackAndWhiteConverter;
 import org.gajaba.demo.converter.BlurConverter;
 import org.gajaba.demo.converter.ImageConverter;
-=======
->>>>>>> 606402cad929b7abb8fe12043ebd875e160abd33
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
