@@ -7,6 +7,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.gajaba.demo.converter.BlackAndWhiteConverter;
+import org.gajaba.demo.converter.BlurConverter;
 import org.gajaba.demo.converter.ImageConverter;
 
 import javax.imageio.ImageIO;
@@ -34,6 +35,7 @@ public class UploadServlet extends HttpServlet {
 
     static {
         converters.put("bw", new BlackAndWhiteConverter());
+        converters.put("bl", new BlurConverter());
     }
 
     public void init(ServletConfig config) throws ServletException {
