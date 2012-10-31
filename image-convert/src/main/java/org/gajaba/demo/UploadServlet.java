@@ -1,30 +1,27 @@
 package org.gajaba.demo;
 
 
-import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+<<<<<<< HEAD
 import org.gajaba.demo.converter.BlackAndWhiteConverter;
 import org.gajaba.demo.converter.BlurConverter;
 import org.gajaba.demo.converter.ImageConverter;
+=======
+>>>>>>> 606402cad929b7abb8fe12043ebd875e160abd33
 
-import javax.imageio.ImageIO;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class UploadServlet extends HttpServlet {
 
@@ -74,30 +71,11 @@ public class UploadServlet extends HttpServlet {
 
                     File file = new File(destinationDir, item.getName());
                     item.write(file);
-                    Image image = ImageIO.read(file);
-                    BufferedImage buffered = (BufferedImage) image;
-                    Thumbnails.of(buffered)
-                            .size(40, 40)
-                            .outputFormat("jpg")
-                            .toFile(new File(destinationDir, "TH_" + item.getName()));
 
-                    ContextListener.addProcessing(file);
+                    String action = request.getParameter("action");
+                    ConvertTask task = new ConvertTask(destinationDir, item.getName(), action);
+                    new Thread(task).start();
 
-                    Thread.sleep(2000);
-
-                    ImageConverter converter = converters.get(request.getParameter("action"));
-                    if (converter != null) {
-                        BufferedImage converted = converter.convert(buffered);
-                        ImageIO.write(converted, "JPEG", new File(destinationDir, "CO_" + item.getName()));
-                        Thumbnails.of(converted)
-                                .size(40, 40)
-                                .outputFormat("jpg")
-                                .toFile(new File(destinationDir, "TH_CO_" + item.getName()));
-                    }
-
-
-                    ContextListener.removeProcessing(file);
-                    ContextListener.addDone(file);
                 }
                 out.close();
                 System.gc();
