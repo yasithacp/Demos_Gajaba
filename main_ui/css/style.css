@@ -74,7 +74,7 @@
 }
 #requests {
     position: absolute;
-    top: 245px;
+    top: 255px;
 }
 .myaccount-btnOver {
     background-position: 0 -41px;
@@ -121,6 +121,14 @@
     text-shadow: 0 1px 0 #FFFFFF;
     margin-left: -10px;
 }
+.ruleSet {
+    height: 250px;
+    overflow: auto;
+}
+.requestSet {
+    height: 250px;
+    overflow: auto;
+}
 BODY {
     background-image: url("../img/maincontent_backg.png");
     color: #89B0C0;
@@ -130,3 +138,16 @@ BODY {
     overflow: hidden;
 
 }
+.item .openclose {
+    background: url("../img/open_close.png") no-repeat scroll 0 -10px transparent;
+    cursor: default;
+    display: inline-block;
+    height: 10px;
+    left: 1px;
+    margin: 4px 5px 0;
+    overflow: hidden;
+    position: relative;
+    top: 1px;
+    width: 9px;
+}
+
