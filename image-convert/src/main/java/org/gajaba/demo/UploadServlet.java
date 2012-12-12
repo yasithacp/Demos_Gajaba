@@ -5,6 +5,9 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.gajaba.demo.converter.BlackAndWhiteConverter;
+import org.gajaba.demo.converter.BlurConverter;
+import org.gajaba.demo.converter.ImageConverter;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -14,14 +17,22 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class UploadServlet extends HttpServlet {
 
     private static final String TMP_DIR_PATH = "./content";
     private File tmpDir;
     private File destinationDir;
+    private static final Map<String, ImageConverter> converters = new HashMap<String, ImageConverter>();
+
+    static {
+        converters.put("bw", new BlackAndWhiteConverter());
+        converters.put("bl", new BlurConverter());
+    }
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);

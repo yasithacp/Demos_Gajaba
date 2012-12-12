@@ -206,11 +206,12 @@ body {
     display: block;
     height: 398px;
     position: relative;
+
+    overflow: auto;
+    z-index: 1;
 }
 
 .bootcamp .setup .image {
-    overflow: auto;
-    z-index: 1;
     /*background-image: url("https://a248.e.akamai.net/assets.github.com/images/modules/dashboard/bootcamp/octocat_setup.png?01fc92e0");*/
 }
 
@@ -332,4 +333,13 @@ body {
     height: 55px;
     width: 40px;
 }
+.swfupload{
+    left: 2px;
+    top: 2px;
+}
+
+
+
+
+
 

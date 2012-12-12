@@ -10,14 +10,39 @@
         body {
             font: 13px Arial, Helvetica, Sans-serif;
         }
+
+        #actionDrp{
+            float: left;
+            border: 0 none;
+            height: 32px;
+            width: 160px;
+            margin-left: 20px;
+            margin-top: 10px;
+            background-color: #5F5454;
+            font-size: 14px;
+            color: white;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+        }
     </style>
     <script type="text/javascript">
         $(function () {
+            uploadify();
+            $('#actionDrp').change(function () {
+                uploadify();
+            });
+
+        });
+
+        function uploadify() {
+            var drpValue = $('#actionDrp').val();
+            var url = window.location.href.toString().split(window.location.host)[1].split('ui/')[0];
             $('#file_upload').uploadify({
                 'swf':'swf/uploadify.swf',
-                'uploader':'upload?action=bw'
+                'uploader':url + 'upload?action=' + drpValue
             });
-        });
+        }
     </script>
 </head>
 
@@ -41,7 +66,7 @@
             </li>
             <li class="create-a-repo">
                 <a>
-                    <div class="image"></div>
+                    <div class="image" id="server2"></div>
                     <div class="desc">
                         <h2>Server</h2>
 
@@ -52,7 +77,7 @@
             </li>
             <li class="fork-a-repo">
                 <a>
-                    <div class="image"></div>
+                    <div class="image" id="server3"></div>
                     <div class="desc">
                         <h2>Server</h2>
 
@@ -63,7 +88,7 @@
             </li>
             <li class="be-social">
                 <a>
-                    <div class="image"></div>
+                    <div class="image" id="server4"></div>
                     <div class="desc">
                         <h2>Server</h2>
 
@@ -81,15 +106,22 @@
     <div id="queue"></div>
     <div style="float: left;">
         <input id="file_upload" name="file_upload" type="file" multiple="true">
+        <select id="actionDrp" class="selectBox">
+            <option value="bw">To Black and White</option>
+            <option value="bl">To Blurred Image</option>
+        </select>
     </div>
 </form>
 
 <script>
-    function refreshDiv() {
-        $('#server1').load('status/server1');
-        setTimeout(refreshDiv, 1000);
+    function refreshDiv(i) {
+        $('#server' + i).load('../status/server' + i + '_' + Math.random());
+        setTimeout(refreshDiv, 1000, i);
     }
-    refreshDiv();
+    refreshDiv(1);
+    refreshDiv(2);
+    refreshDiv(3);
+    refreshDiv(4);
 </script>
 
 </body>

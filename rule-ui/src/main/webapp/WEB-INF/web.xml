@@ -1,0 +1,46 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+    <display-name>Image Converter - Demo App for Gajaba</display-name>
+
+    <context-param>
+        <param-name>serverId</param-name>
+        <param-value>2</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>statusServlet</servlet-name>
+        <jsp-file>/status.jsp</jsp-file>
+    </servlet>
+
+    <servlet>
+        <servlet-name>uploadServlet</servlet-name>
+        <servlet-class>org.gajaba.demo.UploadServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>imageServlet</servlet-name>
+        <servlet-class>org.gajaba.demo.ImageServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>statusServlet</servlet-name>
+        <url-pattern>/status/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>imageServlet</servlet-name>
+        <url-pattern>/content/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>uploadServlet</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+
+    <listener>
+        <listener-class>org.gajaba.demo.ContextListener</listener-class>
+    </listener>
+</web-app>
