@@ -65,6 +65,11 @@ public class UserVO implements Serializable{
         messages.add(msg);
     }
     
+    public void setMessages(ArrayList<MessageVO> msgs){
+        
+        messages = msgs;
+    }
+    
     public ArrayList<MessageVO> getMessages(){
     
         return messages;

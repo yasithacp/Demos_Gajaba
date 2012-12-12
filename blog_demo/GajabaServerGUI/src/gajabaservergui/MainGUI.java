@@ -1,0 +1,470 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package gajabaservergui;
+
+import com.org.SampleServiceStub;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import org.apache.axis2.AxisFault;
+import org.gajaba.agent.Agent;
+import org.gajaba.group.GMSSeparator;
+import org.gajaba.group.GroupManager;
+import org.gajaba.group.KeySeparator;
+
+/**
+ *
+ * @author kasuncp
+ */
+public class MainGUI extends javax.swing.JFrame implements ActionListener, ListSelectionListener{
+
+    public static final String LOCALHOST = "localhost";
+    private Agent agent;
+    private GroupManager manager;
+    private Map<Object, String> cache;
+    private KeySeparator separator;
+    
+    private ArrayList<String> service1users;
+    private ArrayList<String> service2users;
+    
+    private String service1IP;
+    private String service2IP;
+    
+    String selectedValue;
+    
+    /**
+     * Creates new form MainGUI
+     */
+    public MainGUI() {
+        initComponents();
+        
+        agent = new Agent();
+        agent.start(getIPAddress(), "xblog_server_gui");
+        
+        manager = agent.getGroupManager();
+        separator = new GMSSeparator();
+        
+        service1users = new ArrayList<>();
+        service2users = new ArrayList<>();
+        
+        jList1.addListSelectionListener(this);
+        jList2.addListSelectionListener(this);
+        
+        refresh();
+    }
+    
+    public String getIPAddress() {
+        List<InetAddress> ipAddresses = new ArrayList<>();
+        String ipAddress = null;
+
+        Enumeration e;
+        try {
+            e = NetworkInterface.getNetworkInterfaces();
+
+            while (e.hasMoreElements()) {
+                NetworkInterface ni = (NetworkInterface) e.nextElement();
+                if (ni.isLoopback() || !ni.isUp()) {
+                    continue;
+                }
+
+                for (Enumeration e2 = ni.getInetAddresses(); e2.hasMoreElements(); ) {
+                    InetAddress ip = (InetAddress) e2.nextElement();
+                    ipAddresses.add(ip);
+                }
+            }
+        } catch (SocketException e1) {
+            e1.printStackTrace();
+        }
+        if (ipAddresses.isEmpty()) {
+            return LOCALHOST;
+        } else {
+            for (InetAddress ip : ipAddresses) {
+                if (ip instanceof Inet4Address) {
+                    ipAddress = ip.getHostAddress();
+                    break;
+                }
+            }
+        }
+
+        if (ipAddress == null) {
+            ipAddress = ipAddresses.get(0).getHostAddress();
+        }
+
+        if(ipAddress == null){
+            ipAddress = LOCALHOST;
+        }
+
+        return ipAddress;
+    }
+    
+    public void refresh(){
+    
+        cache = manager.getCache();
+        
+        service1users.clear();
+        service2users.clear();
+        
+        for (Map.Entry<Object, String> cacheEntry : cache.entrySet()) {
+
+                String service = separator.getMemberTokenId(cacheEntry.getKey());
+                String key = separator.getKey(cacheEntry.getKey()).toString();
+
+                if (!"ip".equals(key) && "true".equals(cacheEntry.getValue())) {
+                    switch (service) {
+                        case "xblog_service_1":
+
+                            service1users.add(key);
+
+                            break;
+                        case "xblog_service_2":
+
+                            service2users.add(key);
+
+                            break;
+                            
+                    }
+                } else if ("ip".equals(key)) {
+                    switch (service) {
+                        case "xblog_service_1":
+
+                            service1IP = cacheEntry.getValue();
+
+                            break;
+                        case "xblog_service_2":
+
+                            service2IP = cacheEntry.getValue();
+
+                            break;
+                    }
+                }
+            }
+
+            jList1.setListData(service1users.toArray());
+            System.out.println("1 "+ service1users);
+            jList2.setListData(service2users.toArray());
+            System.out.println("2 "+service2users);
+            
+            revalidate();
+            repaint();
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jScrollPane1.setViewportView(jList1);
+
+        jScrollPane2.setViewportView(jList2);
+
+        jButton1.setText(">>");
+        jButton1.setEnabled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("<<");
+        jButton2.setEnabled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Refresh");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("XBlog Service 1");
+
+        jLabel2.setText("(Beginner Users)");
+
+        jLabel3.setText("XBlog Service 2");
+
+        jLabel4.setText("(Advanced Users)");
+
+        jButton4.setText("Done");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton1)
+                                    .addComponent(jButton2)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addGap(1, 1, 1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                        .addComponent(jButton3)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        refresh();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        
+        System.exit(0);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        if(!"".equals(selectedValue) || selectedValue != null){
+        
+            String targetEndpoint = "http://" + service1IP + ":8084/axis2/services/SampleService";
+            try {
+                SampleServiceStub stub = new SampleServiceStub(targetEndpoint);
+                
+                try {
+                    stub.publish(selectedValue, selectedValue, "false");
+                } catch (RemoteException ex) {
+                    Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            } catch (AxisFault ex) {
+                Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            targetEndpoint = "http://" + service2IP + ":8084/axis2/services/SampleService";
+            try {
+                SampleServiceStub stub = new SampleServiceStub(targetEndpoint);
+                
+                try {
+                    stub.publish(selectedValue, selectedValue, "true");
+                } catch (RemoteException ex) {
+                    Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            } catch (AxisFault ex) {
+                Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            refresh();
+        }
+        
+        jButton1.setEnabled(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        if(!"".equals(selectedValue) || selectedValue != null){
+        
+            String targetEndpoint = "http://" + service2IP + ":8084/axis2/services/SampleService";
+            try {
+                SampleServiceStub stub = new SampleServiceStub(targetEndpoint);
+                
+                try {
+                    stub.publish(selectedValue, selectedValue, "false");
+                } catch (RemoteException ex) {
+                    Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            } catch (AxisFault ex) {
+                Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            targetEndpoint = "http://" + service1IP + ":8084/axis2/services/SampleService";
+            try {
+                SampleServiceStub stub = new SampleServiceStub(targetEndpoint);
+                
+                try {
+                    stub.publish(selectedValue, selectedValue, "true");
+                } catch (RemoteException ex) {
+                    Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            } catch (AxisFault ex) {
+                Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            refresh();
+        }
+        
+        jButton1.setEnabled(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MainGUI().setVisible(true);
+            }
+        });
+    }
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JList jList1;
+    private javax.swing.JList jList2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent event) {
+
+        if (event.getSource() == jList1 && !event.getValueIsAdjusting()) {
+            // Get the current selection and place it in the
+            // edit field
+            selectedValue = (String) jList1.getSelectedValue();
+            if (selectedValue != null) {
+                jButton1.setEnabled(true);
+                jButton2.setEnabled(false);
+                
+                jList2.clearSelection();
+                
+            }
+        }
+        
+        if (event.getSource() == jList2 && !event.getValueIsAdjusting()) {
+            // Get the current selection and place it in the
+            // edit field
+            selectedValue = (String) jList2.getSelectedValue();
+            if (selectedValue != null) {
+                jButton1.setEnabled(false);
+                jButton2.setEnabled(true);
+                
+                jList1.clearSelection();
+                
+            }
+        }
+    }
+}

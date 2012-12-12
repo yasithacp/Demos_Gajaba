@@ -31,7 +31,7 @@ public class MessageBO {
         try {
                 //db = Db4o.openFile(Constants.DB_NAME);
                 //MessageVO messageVO = XMLUtil.getMessageVOFromXML(xml);
-                MessageVO messageVO = new MessageVO(content, new UserVO(uname, pword, group));
+                MessageVO messageVO = new MessageVO(content, db.getUser(uname) != null ? db.getUser(uname) : new UserVO(uname, pword, group));
 
                 if (messageVO != null) {
                         // Add message only if user is registered

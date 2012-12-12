@@ -165,14 +165,16 @@ public class SampleService {
             Logger.getLogger(SampleService.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        StringBuilder xml = new StringBuilder();
-        xml.append("<user>");
-        xml.append("<username>").append("Error creating user!").append("</username>");
-        xml.append("<password>").append("").append("</password>");
-        xml.append("<aboutme>").append("").append("</aboutme>");
-        xml.append("</user>");
-
-        return xml.toString();
+//        StringBuilder xml = new StringBuilder();
+//        xml.append("<user>");
+//        xml.append("<username>").append("Error creating user!").append("</username>");
+//        xml.append("<password>").append("").append("</password>");
+//        xml.append("<aboutme>").append("").append("</aboutme>");
+//        xml.append("</user>");
+//
+//        return xml.toString();
+        
+        return "Error creating user!";
     }
     
     public String logIn(String name, String password){
@@ -189,25 +191,27 @@ public class SampleService {
             }
             else{
             
-                StringBuilder xml = new StringBuilder();
-                xml.append("<user>");
-                xml.append("<username>").append(name).append("</username>");
-                xml.append("<password>").append("Incorrect password!").append("</password>");
-                xml.append("<aboutme>").append("").append("</aboutme>");
-                xml.append("</user>");
-
-                return xml.toString();
+//                StringBuilder xml = new StringBuilder();
+//                xml.append("<user>");
+//                xml.append("<username>").append(name).append("</username>");
+//                xml.append("<password>").append("Incorrect password!").append("</password>");
+//                xml.append("<aboutme>").append("").append("</aboutme>");
+//                xml.append("</user>");
+//
+//                return xml.toString();
+                return "Incorrect password!";
             }
         }
         
-        StringBuilder xml = new StringBuilder();
-        xml.append("<user>");
-        xml.append("<username>").append("User does not exist!").append("</username>");
-        xml.append("<password>").append("").append("</password>");
-        xml.append("<aboutme>").append("").append("</aboutme>");
-        xml.append("</user>");
-
-        return xml.toString(); 
+//        StringBuilder xml = new StringBuilder();
+//        xml.append("<user>");
+//        xml.append("<username>").append("User does not exist!").append("</username>");
+//        xml.append("<password>").append("").append("</password>");
+//        xml.append("<aboutme>").append("").append("</aboutme>");
+//        xml.append("</user>");
+//
+//        return xml.toString(); 
+        return "User does not exist!";
     }
     
     public String getCurrentUser(){
@@ -245,6 +249,66 @@ public class SampleService {
             Logger.getLogger(SampleService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "Error inserting message!";
+    }
+    
+//    public String addUser(UserVO user){
+//    
+//        if(group.addUser(user)){
+//        
+//            OutputStream file;
+//            try {
+//                file = new FileOutputStream(Constants.DB_NAME);
+//                OutputStream buffer = new BufferedOutputStream(file);
+//                ObjectOutput output = new ObjectOutputStream(buffer);
+//
+//                try {
+//                    output.writeObject(this.group);
+//                } 
+//                finally {
+//                    output.close();
+//                }
+//
+//            } catch (IOException ex) {
+//                Logger.getLogger(SampleService.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            
+//            return "User addition successful!";
+//        }
+//        else{
+//        
+//            return "User addition unsuccessful!";
+//        }
+//    }
+//    
+//    public UserVO removeUser(String name){
+//    
+//        UserVO usr = group.removeUser(name);
+//        
+//        if(usr != null){
+//         
+//            OutputStream file;
+//            try {
+//                file = new FileOutputStream(Constants.DB_NAME);
+//                OutputStream buffer = new BufferedOutputStream(file);
+//                ObjectOutput output = new ObjectOutputStream(buffer);
+//
+//                try {
+//                    output.writeObject(this.group);
+//                } 
+//                finally {
+//                    output.close();
+//                }
+//
+//            } catch (IOException ex) {
+//                Logger.getLogger(SampleService.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//        
+//        return usr;
+//    }
+    
+    public String getGroup(){
+        return group.getName();
     }
     
     public String getXML(String name){

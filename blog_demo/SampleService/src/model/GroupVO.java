@@ -38,6 +38,14 @@ public class GroupVO implements Serializable{
             
             users.put(user.getUsername(), user);
             user.setGroupName(groupName);
+            ArrayList<MessageVO> msgs = user.getMessages();
+            if(!msgs.isEmpty()){
+            
+                for(int i=0; i<msgs.size(); ++i) {
+                    addMessage(msgs.get(i));
+                }
+            }
+            
             return true;
         }
         
@@ -47,8 +55,10 @@ public class GroupVO implements Serializable{
     public UserVO removeUser(String username){
     
         UserVO user = users.remove(username);
-        messages.remove(username);
-        user.setGroupName("");
+        if(user != null){
+            user.setMessages(messages.remove(username));
+            user.setGroupName("");
+        }
         
         return user;
     }
@@ -154,7 +164,7 @@ public class GroupVO implements Serializable{
                 }
             }
         }
-        
+
         return list;
     }
 }

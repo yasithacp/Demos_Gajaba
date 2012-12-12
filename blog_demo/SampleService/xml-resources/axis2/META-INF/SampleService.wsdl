@@ -67,6 +67,13 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
+            <xs:element name="getGroupResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="getIPAddressResponse">
                 <xs:complexType>
                     <xs:sequence>
@@ -186,15 +193,15 @@
     <wsdl:message name="insertMessageResponse">
         <wsdl:part name="parameters" element="ns0:insertMessageResponse"/>
     </wsdl:message>
-    <wsdl:message name="getCurrentUserRequest"/>
-    <wsdl:message name="getCurrentUserResponse">
-        <wsdl:part name="parameters" element="ns0:getCurrentUserResponse"/>
-    </wsdl:message>
     <wsdl:message name="searchAllJSONRequest">
         <wsdl:part name="parameters" element="ns0:searchAllJSON"/>
     </wsdl:message>
     <wsdl:message name="searchAllJSONResponse">
         <wsdl:part name="parameters" element="ns0:searchAllJSONResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getCurrentUserRequest"/>
+    <wsdl:message name="getCurrentUserResponse">
+        <wsdl:part name="parameters" element="ns0:getCurrentUserResponse"/>
     </wsdl:message>
     <wsdl:message name="getAllJSONRequest"/>
     <wsdl:message name="getAllJSONResponse">
@@ -227,6 +234,10 @@
     </wsdl:message>
     <wsdl:message name="getAllJSONForUserResponse">
         <wsdl:part name="parameters" element="ns0:getAllJSONForUserResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getGroupRequest"/>
+    <wsdl:message name="getGroupResponse">
+        <wsdl:part name="parameters" element="ns0:getGroupResponse"/>
     </wsdl:message>
     <wsdl:message name="getIPAddressRequest"/>
     <wsdl:message name="getIPAddressResponse">
@@ -261,13 +272,13 @@
             <wsdl:input message="axis2:insertMessageRequest" wsaw:Action="urn:insertMessage"/>
             <wsdl:output message="axis2:insertMessageResponse" wsaw:Action="urn:insertMessageResponse"/>
         </wsdl:operation>
-        <wsdl:operation name="getCurrentUser">
-            <wsdl:input message="axis2:getCurrentUserRequest" wsaw:Action="urn:getCurrentUser"/>
-            <wsdl:output message="axis2:getCurrentUserResponse" wsaw:Action="urn:getCurrentUserResponse"/>
-        </wsdl:operation>
         <wsdl:operation name="searchAllJSON">
             <wsdl:input message="axis2:searchAllJSONRequest" wsaw:Action="urn:searchAllJSON"/>
             <wsdl:output message="axis2:searchAllJSONResponse" wsaw:Action="urn:searchAllJSONResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getCurrentUser">
+            <wsdl:input message="axis2:getCurrentUserRequest" wsaw:Action="urn:getCurrentUser"/>
+            <wsdl:output message="axis2:getCurrentUserResponse" wsaw:Action="urn:getCurrentUserResponse"/>
         </wsdl:operation>
         <wsdl:operation name="getAllJSON">
             <wsdl:input message="axis2:getAllJSONRequest" wsaw:Action="urn:getAllJSON"/>
@@ -292,6 +303,10 @@
         <wsdl:operation name="getAllJSONForUser">
             <wsdl:input message="axis2:getAllJSONForUserRequest" wsaw:Action="urn:getAllJSONForUser"/>
             <wsdl:output message="axis2:getAllJSONForUserResponse" wsaw:Action="urn:getAllJSONForUserResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getGroup">
+            <wsdl:input message="axis2:getGroupRequest" wsaw:Action="urn:getGroup"/>
+            <wsdl:output message="axis2:getGroupResponse" wsaw:Action="urn:getGroupResponse"/>
         </wsdl:operation>
         <wsdl:operation name="getIPAddress">
             <wsdl:input message="axis2:getIPAddressRequest" wsaw:Action="urn:getIPAddress"/>
@@ -325,8 +340,8 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="getCurrentUser">
-            <soap:operation soapAction="urn:getCurrentUser" style="document"/>
+        <wsdl:operation name="searchAllJSON">
+            <soap:operation soapAction="urn:searchAllJSON" style="document"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -334,8 +349,8 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="searchAllJSON">
-            <soap:operation soapAction="urn:searchAllJSON" style="document"/>
+        <wsdl:operation name="getCurrentUser">
+            <soap:operation soapAction="urn:getCurrentUser" style="document"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -390,6 +405,15 @@
         </wsdl:operation>
         <wsdl:operation name="getAllJSONForUser">
             <soap:operation soapAction="urn:getAllJSONForUser" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getGroup">
+            <soap:operation soapAction="urn:getGroup" style="document"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -454,8 +478,8 @@
                 <soap12:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="getCurrentUser">
-            <soap12:operation soapAction="urn:getCurrentUser" style="document"/>
+        <wsdl:operation name="searchAllJSON">
+            <soap12:operation soapAction="urn:searchAllJSON" style="document"/>
             <wsdl:input>
                 <soap12:body use="literal"/>
             </wsdl:input>
@@ -463,8 +487,8 @@
                 <soap12:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="searchAllJSON">
-            <soap12:operation soapAction="urn:searchAllJSON" style="document"/>
+        <wsdl:operation name="getCurrentUser">
+            <soap12:operation soapAction="urn:getCurrentUser" style="document"/>
             <wsdl:input>
                 <soap12:body use="literal"/>
             </wsdl:input>
@@ -519,6 +543,15 @@
         </wsdl:operation>
         <wsdl:operation name="getAllJSONForUser">
             <soap12:operation soapAction="urn:getAllJSONForUser" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getGroup">
+            <soap12:operation soapAction="urn:getGroup" style="document"/>
             <wsdl:input>
                 <soap12:body use="literal"/>
             </wsdl:input>
@@ -583,15 +616,6 @@
                 <mime:content type="text/xml" part="insertMessage"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="getCurrentUser">
-            <http:operation location="SampleService/getCurrentUser"/>
-            <wsdl:input>
-                <mime:content type="text/xml" part="getCurrentUser"/>
-            </wsdl:input>
-            <wsdl:output>
-                <mime:content type="text/xml" part="getCurrentUser"/>
-            </wsdl:output>
-        </wsdl:operation>
         <wsdl:operation name="searchAllJSON">
             <http:operation location="SampleService/searchAllJSON"/>
             <wsdl:input>
@@ -599,6 +623,15 @@
             </wsdl:input>
             <wsdl:output>
                 <mime:content type="text/xml" part="searchAllJSON"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getCurrentUser">
+            <http:operation location="SampleService/getCurrentUser"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getCurrentUser"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getCurrentUser"/>
             </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="getAllJSON">
@@ -653,6 +686,15 @@
             </wsdl:input>
             <wsdl:output>
                 <mime:content type="text/xml" part="getAllJSONForUser"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getGroup">
+            <http:operation location="SampleService/getGroup"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getGroup"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getGroup"/>
             </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="getIPAddress">
