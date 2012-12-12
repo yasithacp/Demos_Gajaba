@@ -10,6 +10,21 @@
         body {
             font: 13px Arial, Helvetica, Sans-serif;
         }
+
+        #actionDrp{
+            float: left;
+            border: 0 none;
+            height: 32px;
+            width: 160px;
+            margin-left: 20px;
+            margin-top: 10px;
+            background-color: #5F5454;
+            font-size: 14px;
+            color: white;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+        }
     </style>
     <script type="text/javascript">
         $(function () {
