@@ -25,10 +25,11 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-//        agent = new Agent();
-//        serverId = servletContextEvent.getServletContext().getInitParameter(SERVER_ID);
-//        String ipAddress = getIPAddress();
-//        agent.start(ipAddress, IMAGE_SERVER + getServerId());
+        agent = new Agent();
+        serverId = servletContextEvent.getServletContext().getInitParameter(SERVER_ID);
+        String ipAddress = getIPAddress();
+        agent.start(ipAddress, IMAGE_SERVER + getServerId());
+        agent.publish("id",getServerId());
 
 
         tempDir = new File(TMP_DIR_PATH);

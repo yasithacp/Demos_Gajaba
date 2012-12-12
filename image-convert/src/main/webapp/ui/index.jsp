@@ -14,17 +14,18 @@
     <script type="text/javascript">
         $(function () {
             uploadify();
-            $('#actionDrp').change(function(){
+            $('#actionDrp').change(function () {
                 uploadify();
             });
 
         });
 
-        function uploadify(){
+        function uploadify() {
             var drpValue = $('#actionDrp').val();
+            var url = window.location.href.toString().split(window.location.host)[1].split('ui/')[0];
             $('#file_upload').uploadify({
                 'swf':'swf/uploadify.swf',
-                'uploader':'upload?action='+drpValue
+                'uploader':url + 'upload?action=' + drpValue
             });
         }
     </script>
@@ -50,7 +51,7 @@
             </li>
             <li class="create-a-repo">
                 <a>
-                    <div class="image"></div>
+                    <div class="image" id="server2"></div>
                     <div class="desc">
                         <h2>Server</h2>
 
@@ -61,7 +62,7 @@
             </li>
             <li class="fork-a-repo">
                 <a>
-                    <div class="image"></div>
+                    <div class="image" id="server3"></div>
                     <div class="desc">
                         <h2>Server</h2>
 
@@ -72,7 +73,7 @@
             </li>
             <li class="be-social">
                 <a>
-                    <div class="image"></div>
+                    <div class="image" id="server4"></div>
                     <div class="desc">
                         <h2>Server</h2>
 
@@ -98,11 +99,14 @@
 </form>
 
 <script>
-    function refreshDiv() {
-        $('#server1').load('status/server1');
-        setTimeout(refreshDiv, 1000);
+    function refreshDiv(i) {
+        $('#server' + i).load('../status/server' + i + '_' + Math.random());
+        setTimeout(refreshDiv, 1000, i);
     }
-    refreshDiv();
+    refreshDiv(1);
+    refreshDiv(2);
+    refreshDiv(3);
+    refreshDiv(4);
 </script>
 
 </body>
